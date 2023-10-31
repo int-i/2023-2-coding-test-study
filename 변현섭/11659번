@@ -1,0 +1,15 @@
+import sys
+input = sys.stdin.readline
+
+data_count, query_count = map(int, input().split())
+num_array = list(map(int, input().split())) 
+sum_array = [0] # 0번 인덱스의 원소를 0으로 설정
+sum = 0
+
+for i in num_array:
+    sum += i
+    sum_array.append(sum) // append에 연산은 넣을 수 없다. 즉, append(sum += i)는 불가능하다.
+    
+for i in range(query_count):
+    start,end = map(int, input().split())
+    print(sum_array[end] - sum_array[start-1])
