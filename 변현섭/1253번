@@ -1,0 +1,27 @@
+import sys
+input = sys.stdin.readline
+
+size = int(input())
+num_list = list(map(int, input().split()))
+num_list.sort()
+count = 0
+
+for k in range(size):
+    target_num = num_list[k] # 좋은 수 여부를 확인하려는 값
+    i = 0
+    j = size - 1
+    while i < j:
+        if num_list[i] + num_list[j] == target_num:
+            if i != k and j != k: # 좋은 수를 구성할 때 자기 자신을 포함해선 안됨
+                count += 1
+                break # 좋은 수인지 확인만 하면 되고, 좋은 수를 구성하는 경우의 수는 필요하지 않음
+            elif i == k:
+                i += 1 # i가 k를 넘어가게 한 후 연산 재개
+            elif j == k:
+                j -= 1 # j가 k를 넘어가게 한 후 연산 재개
+        elif num_list[i] + num_list[j] < target_num: # 일치하지 않을 때는 i, j가 k와 같은지에 관심 없음
+            i += 1
+        else:
+            j -= 1
+            
+print(count) 
