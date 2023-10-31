@@ -1,0 +1,19 @@
+num = int(input())
+
+count = 0 
+start_index = 1 # index를 1부터 시작하여 원소와 index를 일치시킴
+end_index = 1
+sum = 1 
+
+while end_index <= num:
+    if sum == num:
+        count += 1
+        end_index += 1
+        sum += end_index
+    elif sum > num:
+        sum -= start_index
+        start_index += 1
+    else :
+        end_index += 1
+        sum += end_index
+print(count)
