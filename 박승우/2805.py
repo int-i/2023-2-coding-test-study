@@ -1,7 +1,7 @@
 import sys
 n, m = map(int, sys.stdin.readline().split())
 tree = list(map(int, sys.stdin.readline().split()))
-left = 1
+left = 0
 right = max(tree)
 mid = (left + right)//2
 while True:
