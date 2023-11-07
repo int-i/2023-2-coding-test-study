@@ -1,0 +1,28 @@
+from collections import deque
+
+tot_length, part_length = map(int, input().split()) # DNA 문자열의 길이, 부분 문자열의 길이
+dna_str = list(input()) # DNA 문자열
+A, C, G, T = map(int, input().split()) # A, C, G, T의 최소 개수
+
+dic = {'A': 0, 'C': 0, 'G': 0, 'T': 0}
+left, right = 0, part_length-1 # 첫 윈도우
+dq = deque(dna_str[left:right]) # 윈도우를 deque로 변환
+result = 0 # 조건을 만족하는 비밀번호의 개수
+
+for i in dq:
+    dic[i] += 1 # 첫 윈도우의 left에서 right-1까지의 A, C, G, T의 개수
+
+while right < tot_length:
+
+    dic[dna_str[right]] += 1 # 첫 윈도우를 완성시킴. 그 이후 루프부터는 구간 이동을 의미
+
+    # 주어진 조건을 만족
+    if dic['A'] >= A  and dic['C'] >= C and dic['G'] >= G and dic['T'] >= T:
+        result += 1
+
+    # 구간이동
+    dic[dna_str[left]] -= 1 # 왼쪽 원소 제거
+    left += 1
+    right += 1
+
+print(result)
