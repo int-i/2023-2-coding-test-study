@@ -1,0 +1,33 @@
+import sys
+input = sys.stdin.readline
+
+size = int(input()) # 수열의 크기
+arr = [0] * size # 수열
+
+for i in range(size):
+    arr[i] = int(input())
+    
+stack = [] # stack 배열
+num = 1 # 1부터 push
+result = True # +, -로 표현할 수 있음을 의미(파이썬에서는 true 사용 불가)
+answer = "" # 문제의 조건을 만족하는 정답
+
+for i in range(size):
+    if arr[i] >= num: 
+        while arr[i] >= num: # arr[i]와 같아질 때까지 stack에 append
+            stack.append(num)
+            num += 1 
+            answer += "+\n" # 더한 만큼 answer에 +를 덧붙임
+        stack.pop() # 마지막 값을 pop하여 수열을 만듦
+        answer += "-\n" # pop할 때, answer에 -를 덧붙임 
+    else: # 현재 수열의 수가 num보다 작을 때
+        n = stack.pop() # stack에서 pop
+        if n > arr[i]: # pop한 수가 현재 수열의 수보다 크면 
+            print("NO") # 수열 표현 불가(push하면 더 커지고, pop을 2번 하면 원하는 수열이 안 나오므로)
+            result = False
+            break
+        else:
+            answer += "-\n"
+            
+if result:
+    print(answer)
